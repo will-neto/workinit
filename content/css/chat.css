@@ -1,0 +1,131 @@
+body{
+    background-color: #35ab18;
+}
+
+.corpo {
+    padding: 0 5%;
+}
+
+.usuario-infos {
+    height: 60%;
+    background-color: #fff;
+    position: relative;
+    width: 100%;
+    padding-top: 35%;
+    text-align: center;
+    border-radius: 5%;
+}
+
+.usuario-infos h4{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.usuario-infos h5,
+.usuario-infos span{
+    font-size: 14px;
+}
+
+.icone-foto{
+    position: absolute;
+    top: -20%;
+    width: 50%;
+    max-width: 160px;
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);    
+}
+
+.chat{
+    width: 100%;
+    background-color: #fff;
+    height: 500px;
+    border-radius: 30px;
+    padding: 2% 5%;
+}
+
+.chat .fa-comments{
+    font-size: 40px;
+    margin-right: 20px;
+}
+
+.chat .fa-comments + span{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.chat .painel{
+    height: 350px;
+    border: 1px solid black;
+    margin-top: 20px;
+    padding: 10px 10px;
+}
+
+.chat input{
+    margin-top: 10px;
+    width: 100%;
+}
+
+.chat .row:nth-child(3) .col-md-10,
+.chat .row:nth-child(3) .col-md-2 {
+    padding-left: 0 !important;
+}
+
+.chat .row:nth-child(3) .col-md-2 {
+    padding-right: 0 !important;
+}
+
+.chat .foto-painel img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.chat .foto-painel span{
+    color: #797979;
+    font-weight: bold;
+}
+
+.mensagem-contato{
+    background-color: #8532d0;
+    width: 50%;
+    margin-top: 20px;
+    padding: 5px;
+    color: #fff;
+    font-size: 14px;
+    border: 1px solid #4a0986;
+}
+
+.mensagem{
+    background-color: #36d410;
+    width: 50%;
+    margin-top: 20px;
+    padding: 5px;
+    color: #fff;
+    font-size: 14px;
+    border: 1px solid #1b7d03;
+    margin-left: 50%;
+}
+
+
+@media(max-width: 768px){
+    .usuario-infos{
+        height: auto;
+        margin-top: 80px;
+        margin-bottom: 50px;
+        padding-bottom: 50px;
+    }
+
+    .chat{
+        padding: 2% 8%;
+        height: auto;
+        padding-bottom: 20px;
+        margin-bottom: 50px;
+    }
+
+    .icone-foto{
+        left: 50%;
+        transform: translateX(-50%);    
+    }
+}

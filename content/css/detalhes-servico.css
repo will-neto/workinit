@@ -1,0 +1,75 @@
+.topo {
+    border-top: 100px solid #35ab18;
+}
+
+h1{
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 30px;
+    color: #c989ce;
+}
+
+.container > .row:first-child,
+.container > .row:nth-child(3){
+    margin-top: 20px;
+}
+
+
+.icone-foto{
+    width: 150px;
+    height: 150px;
+    padding: 10px;
+}
+
+textarea{
+    resize: none;
+    margin-top: 20px;
+}
+
+
+.btn-outline-success {
+    width: 200px;
+}
+
+.icone-usuario{
+    width: 100px;
+    height: 100px;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.usuario-infos {
+    background-color: #fff;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    border-radius: 5%;
+    margin-top: 20px;
+}
+
+.usuario-infos h4{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.usuario-infos h5,
+.usuario-infos span{
+    font-size: 14px;
+}
+
+@media(max-width: 768px){
+    .row-detalhes{
+        display: flex;
+    }
+    
+    .row-detalhes .col-md-8{
+        order: 2;
+        margin-bottom: 50px;
+    }
+
+    .row-detalhes .col-md-4{
+        order: 1;
+        margin-bottom: 50px;
+    }    
+}

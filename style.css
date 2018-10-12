@@ -1,0 +1,72 @@
+h1{
+	text-align: right;
+	width: 90%;
+}
+
+h2{
+	position: absolute;
+	left: 900px;
+	top: 130px;
+	
+}
+
+p{
+	text-align: center;
+}
+
+
+input[type = "text" ]{
+
+	width: 50%;
+	height: 15px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+    margin-top: 10px;
+	border :2px solid #757575;
+	float: right;
+	top: 10px;
+}
+
+img[class = "foto-perfil"]{
+	width: 5%;
+	position: absolute;
+	left: 1200px;
+	top: 80px;
+	border: 8px solid white;
+    box-shadow: 1px 1px 4px black;
+    margin-top: 15px;
+    marker-mid:  15px;
+    
+
+
+
+}
+
+textarea[id = "ResumoPerfil"]{
+	width: 50%;
+	margin-bottom: 15px;
+	border-radius: 5px;
+	border :2px solid #757575;
+	float: right;
+	margin-top: 30px;
+	margin-left: 100px;
+	
+}
+
+button{
+	width: 10%;
+	position: absolute;
+	text-align: center;
+	top: 580px;
+	left: 950px;
+	float: right;
+	margin-top: 30px;
+}
+
+img[class = "foto-colaboradores"]{
+	position: absolute;
+	width: 47%;
+	height: 98%;
+	top: 10px;
+	box-shadow: 1px 1px 4px black;
+}
