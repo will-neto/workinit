@@ -1,3 +1,17 @@
+<?php 
+//conexão
+require_once("conexao/conexao.php"); ?>
+
+<?php
+//consulta servicos
+    $consulta_servicos = "SELECT nomeservico,detalheservico,nome, cidade, imagemservico FROM servicolistagem,usuario WHERE servicolistagem.usuarioID = usuario.id";
+    $servicos = mysqli_query($conecta, $consulta_servicos);
+    
+    if(!$servicos){
+        die("Falha na consulta ao banco de dados");
+    }
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,59 +39,26 @@
         </header>
         
         <section class="conteudo">
+        <?php
+        while($registro = mysqli_fetch_assoc($servicos)){
+        ?>  
             <table class="usuario-caixa">
                 <tr>
                 <td class="foto">
-                    <img src="lib/img/user.png" class="usuario2" alt="perfil"/>
+                    <img src="<?php echo $registro["imagemservico"];?>" class="usuario2" alt="perfil"/>
                 </td>
                 <td>
                     <table style="border:solid 0px;">
-                        <tr><td>Usuario 1</td></tr>
-                        <tr><td>Serviço disponibilizado</td></tr>
-                        <tr><td>Localização</td></tr>
+                        <tr><td><?php echo utf8_encode($registro["nome"]);?></td></tr>
+                        <tr><td><?php echo utf8_encode($registro["nomeservico"]);?></td></tr>
+                        <tr><td><?php echo utf8_encode($registro["cidade"]);?></td></tr>
                     </table>
+        
                 </td></tr>
-            </table>
-            <table class="usuario-caixa">
-                <tr>
-                <td class="foto">
-                    <img src="lib/img/user.png" class="usuario2" alt="perfil"/>
-                </td>
-                <td>
-                    <table style="border:solid 0px;">
-                        <tr><td>Usuario 1</td></tr>
-                        <tr><td>Serviço disponibilizado</td></tr>
-                        <tr><td>Localização</td></tr>
-                    </table>
-                </td></tr>
-            </table>
-            <table class="usuario-caixa">
-                <tr>
-                <td class="foto">
-                    <img src="lib/img/user.png" class="usuario2" alt="perfil"/>
-                </td>
-                <td>
-                    <table style="border:solid 0px;">
-                        <tr><td>Usuario 1</td></tr>
-                        <tr><td>Serviço disponibilizado</td></tr>
-                        <tr><td>Localização</td></tr>
-                    </table>
-                </td></tr>
-            </table>
-            <table class="usuario-caixa">
-                <tr>
-                <td class="foto">
-                    <img src="lib/img/user.png" class="usuario2" alt="perfil"/>
-                </td>
-                <td>
-                    <table style="border:solid 0px;">
-                        <tr><td>Usuario 1</td></tr>
-                        <tr><td>Serviço disponibilizado</td></tr>
-                        <tr><td>Localização</td></tr>
-                    </table>
-                </td></tr>
-            </table>
-            
+        </table>
+        <?php   
+        }
+        ?>
         </section>
         
         
@@ -97,15 +78,20 @@
                                 <input type="submit" class="btn btn-outline-success" value="Login">
                             </div>
                             <div class="col-12 col-sm-12 text-center">
-                                    <small id="emailHelp" class="form-text text-muted">Ainda não possui cadastro? <a href="cadastro.html"> Cadastre-se agora!</a></small>
+                                    <small id="emailHelp" class="form-text text-muted">Ainda não possui cadastro? <a href="cadastro.php"> Cadastre-se agora!</a></small>
                             </div>
                         </div>
             </form>
             </div>
-            
         </section>
-        
-        
     </main>
+    
+        <?php
+            mysqli_free_result($servicos);
+        ?>
 </body>
 </html>
+
+<?php
+    mysqli_close($conecta);
+?>

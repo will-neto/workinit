@@ -1,3 +1,28 @@
+<?php 
+//conexão variavel $coneta
+require_once("conexao/conexao.php"); ?>
+
+        <?php
+            if(isset($_POST["nome"])){
+                $nome           =$_POST["nome"];
+                $nomeusuario    =$_POST["nomeusuario"];
+                $cpf            =$_POST["cpf"];
+                $telefone       =$_POST["telefone"];
+                $profissao      =$_POST["profissao"];
+                $email          =$_POST["email"];
+                $senha          =$_POST["senha"];
+                $confirmarsenha =$_POST["confirmasenha"];
+                if($senha==$confirmarsenha){
+                $inserir = "INSERT INTO usuario(nome,nomedeusuario,cpf,telefone,profissao,email,senha) VALUES ('$nome', '$nomeusuario', '$cpf', '$telefone', '$profissao', '$email', '$senha')";
+                $operacao_inserir = mysqli_query($conecta,$inserir);
+                }
+                
+                
+                if(!$operacao_inserir){
+                    die("Erro no banco: " . mysqli_error($operacao_inserir));
+                }
+            }       
+        ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,32 +35,37 @@
         <title> Workinit | Cadastro </title>
     </head>
     <body>
+        
+        
             <div class="row h-100">
                 <div class="col-md-6 col-sm-12 col-formulario">
 
                 <img src="lib/img/logo.jpg" class="rounded mx-auto d-block" alt="Workinit">
         
-                    <form>
+                    <form action = "cadastro.php" method="post">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="nome" placeholder="Nome">        
+                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">        
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="cpf" placeholder="CPF">        
+                            <input type="text" class="form-control" id="nome" name="nomeusuario" placeholder="Nome de Usuário">        
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="telefone" placeholder="Telefone">        
+                            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">        
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="profissao" placeholder="Profissão">        
+                            <input type="text" class="form-control" id="telefone" name = "telefone" placeholder="Telefone">        
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="profissao" name = "profissao" placeholder="Profissão">        
                         </div> 
                         <div class="form-group">
-                            <input type="email" class="form-control" id="email" placeholder="E-mail">        
+                            <input type="email" class="form-control" id="email" name = "email" placeholder="E-mail">        
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="senha" placeholder="Senha">        
+                            <input type="password" class="form-control" id="senha" name ="senha" placeholder="Senha">        
                         </div>             
                         <div class="form-group">
-                            <input type="password" class="form-control" id="confirmarSenha" placeholder="Confirme sua senha">        
+                            <input type="password" class="form-control" id="confirmarSenha" name = "confirmasenha" placeholder="Confirme sua senha">        
                         </div>
                         <div class="row">
                             <div class="col-12 col-sm-12 text-right">
@@ -58,3 +88,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     </body>
 </html>
+
+<?php
+    mysqli_close($conecta);
+?>

@@ -1,3 +1,7 @@
+<?php 
+//conexão
+require_once("conexao/conexao.php"); ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -62,3 +66,7 @@
         <script src="content/js/adicionar-servico.js"></script>
     </body>
 </html>
+
+<?php
+    mysqli_close($conecta);
+?>

@@ -1,3 +1,7 @@
+<?php 
+//conexão
+require_once("conexao/conexao.php"); ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,3 +52,7 @@
 
 </body>
 </html>
+
+<?php
+    mysqli_close($conecta);
+?>
