@@ -31,7 +31,7 @@
             if(!$operacao_login){
                 die("Erro no banco: " . mysqli_error($operacao_login));
             } else {
-                if (mysqli_fetch_row($operacao_login) > 0){
+                if (mysqli_num_rows($operacao_login) > 0){
 
                     while ($usuario = mysqli_fetch_assoc($operacao_login)) {
                         $_SESSION['login'] = true;

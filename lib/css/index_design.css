@@ -163,3 +163,14 @@ table{
     border-color:#9b9b9b;
     padding: 1.5%;
 }
+
+.btn-contato{
+    background-color: #92e438;
+    cursor: pointer;
+    border-radius: 50px;
+    margin-top: 5px;
+    padding: 0 10px;
+    color: #fff !important;
+    font-weight: bold;
+    border: 2px solid #7aca22;
+}
