@@ -1,6 +1,14 @@
 <?php 
 //conexão
-require_once("conexao/conexao.php"); ?>
+require_once("conexao/conexao.php"); 
+
+session_start();
+
+if(!isset($_SESSION['login'])){
+    header("Location: login.php");
+}
+
+?>
 
 <!DOCTYPE html>
 <html>

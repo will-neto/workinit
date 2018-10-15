@@ -20,6 +20,8 @@ require_once("conexao/conexao.php"); ?>
                 
                 if(!$operacao_inserir){
                     die("Erro no banco: " . mysqli_error($operacao_inserir));
+                } else {
+                    header("Location: login.php");
                 }
             }       
         ?>

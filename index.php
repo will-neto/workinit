@@ -4,6 +4,12 @@ require_once("conexao/conexao.php"); ?>
 
 <?php
 //consulta servicos
+    session_start();
+
+    if(!isset($_SESSION['login'])){
+        header("Location: index-unautenticated.php");
+    }
+
     $consulta_servicos = "SELECT nomeservico,detalheservico,nome, cidade, imagemservico, nomedeusuario FROM servicolistagem,usuario WHERE servicolistagem.usuarioID = usuario.id";
     $servicos = mysqli_query($conecta, $consulta_servicos);
     
@@ -26,7 +32,6 @@ require_once("conexao/conexao.php"); ?>
     </head>
 <body>
     <main>
-        
         <header>       
             <input type=search name="pesquisa" id="pesquisador" placeholder="pesquise aqui"/>
             <img src="lib/img/logo-png.png" class="logo">

@@ -1,6 +1,45 @@
 <?php 
 //conexão
-require_once("conexao/conexao.php"); ?>
+    require_once("conexao/conexao.php");
+
+    session_start();
+    
+    if(!isset($_SESSION['login'])){
+        header("Location: login.php");
+    }
+
+
+    if(isset($_POST['submit'])) 
+    {
+
+        $nomeErro = "";
+        $descricaoErro = "";
+
+        if ($_POST['nome'] == ""){
+            $nomeErro = "Digite o nome do Serviço";
+        } 
+
+        if ($_POST["descricao"] == "") {
+            $descricaoErro = "Digite a descrição do Serviço";
+        }
+
+        if($nomeErro === '' && $descricaoErro === '') {
+            
+            $nome = $_POST['nome'];
+            $descricao = $_POST['descricao'];
+            $usuarioId = $_SESSION['id'];
+
+            $inserir = "INSERT INTO servicolistagem(nomeservico,detalheservico,imagemservico,usuarioID) VALUES ('$nome', '$descricao', 'lib/img/user.png', '$usuarioId')";
+            $operacao_inserir = mysqli_query($conecta,$inserir);
+                    
+            if(!$operacao_inserir){
+                die("Erro no banco: " . mysqli_error($operacao_inserir));
+            }
+        }
+    }
+    
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -24,39 +63,43 @@ require_once("conexao/conexao.php"); ?>
                     <h1> Adicionar Serviço </h1>
                 </div>
             </div>
+            <form id="servicoForm" action="<?=$_SERVER['PHP_SELF'];?>" method="post">
+                <div class="row">
+                    <div class="col-md-8 col-sm-12 d-flex align-items-end">
+                        <div id="imagens">
+                            <img src="content/img/foto-icone.png" class="icone-foto" alt="ícone enviar foto" />
+                        </div>
+                        <input type="file" name="file" id="file" class="file-personalizado" />
+                        <label for="file"><i class="fas fa-pencil-alt"></i> Adicionar Imagem </label>
+                    </div>
+                    <div class="col-md-2 col-sm-2">
 
-            <div class="row">
-                <div class="col-md-8 col-sm-12 d-flex align-items-end">
-                    <div id="imagens">
-                        <img src="content/img/foto-icone.png" class="icone-foto" alt="ícone enviar foto" />
-                    </div>
-                    <input type="file" name="file" id="file" multiple class="file-personalizado" />
-                    <label for="file"><i class="fas fa-pencil-alt"></i> Adicionar Imagem </label>
-                </div>
-                <div class="col-md-2 col-sm-2">
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="servico" placeholder="Serviço">        
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                        <textarea class="form-control" id="descricao" placeholder="Descrição" rows="6"></textarea>        
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <input type="text" name="nome" class="form-control" id="servico" placeholder="Serviço">        
+                            <?php echo (isset($nomeErro)) ?  "<span class=\"error-validation active\">" . $nomeErro ."</span>" : ""; ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class"row">
-                <div class="col-md-6 col-sm-12">
-                    <input type="button" class="btn btn-outline-primary" value="Cancelar"/> 
-                    <input type="submit" class="btn btn-outline-success" value="Salvar"/>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <textarea class="form-control" name="descricao" id="descricao" placeholder="Descrição" rows="6"></textarea>        
+                            <?php echo (isset($descricaoErro)) ?  "<span class=\"error-validation active\">" . $descricaoErro ."</span>" : ""; ?>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class"row">
+                    <div class="col-md-6 col-sm-12">
+                        <input type="button" class="btn btn-outline-primary" value="Cancelar"/> 
+                        <input name="submit" type="submit" class="btn btn-outline-success" value="Salvar"/>
+                    </div>
+                </div>
+            </form>
+            
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
