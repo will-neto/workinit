@@ -5,9 +5,8 @@ require_once("conexao/conexao.php");
 session_start();
 
 if(!isset($_SESSION['login'])){
-    header("Location: login.php");
+    header("Location: index-unautenticated.php");
 }
-
 
 ?>
 

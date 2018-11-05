@@ -1,12 +1,80 @@
 <?php 
-//conexão
-require_once("conexao/conexao.php"); 
+    //conexão
+    session_start();
 
-session_start();
+    if(!isset($_SESSION['login'])){
+        header("Location: login.php");
+    }
 
-if(!isset($_SESSION['login'])){
-    header("Location: login.php");
-}
+    $usuarioId = $_SESSION['id'];
+    
+    require_once("conexao/conexao.php"); 
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        $servicoId = $_POST['id']; 
+
+        $servico_query = "SELECT * FROM servicolistagem WHERE servicoID = $servicoId AND usuarioID = $usuarioId";
+        $operacao_servico = mysqli_query($conecta, $servico_query);    
+
+        if(!$operacao_servico){
+            header("Location: index.php");
+            //die("Erro no banco: " . mysqli_error($operacao_servico));
+        } else {
+            if (mysqli_num_rows($operacao_servico) > 0){
+                $usuario = mysqli_fetch_assoc($operacao_servico);
+            } else {
+                header("Location: index.php");
+            }
+        }
+    
+        $nomeErro = "";
+        $descricaoErro = "";
+
+        if ($_POST['nome'] == ""){
+            $nomeErro = "Digite o nome do Serviço";
+            $usuario["nomeservico"] = "";
+        } 
+
+        if ($_POST["descricao"] == "") {
+            $descricaoErro = "Digite a descrição do Serviço";
+            $usuario["detalheservico"] = "";
+        }
+
+        $nome = $_POST["nome"];
+        $descricao = $_POST["descricao"];
+        
+        $atualizar = "UPDATE servicolistagem SET nomeservico = '$nome', detalheservico = '$descricao' WHERE servicoID = $servicoId AND usuarioID = $usuarioId";
+        $operacao_atualizar = mysqli_query($conecta,$atualizar);
+                
+        if(!$operacao_atualizar){
+            die("Erro no banco: " . mysqli_error($operacao_atualizar));
+        }
+
+        header("Location: editar-perfil.php");
+
+    } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+        if(!isset($_GET['id']) || $_GET['id'] == ''){
+            header("Location: login.php");
+        }
+
+        $servicoId = $_GET['id']; 
+        $servico_query = "SELECT * FROM servicolistagem WHERE servicoID = $servicoId AND usuarioID = $usuarioId";
+        $operacao_servico = mysqli_query($conecta, $servico_query);    
+
+        if(!$operacao_servico){
+            die("Erro no banco: " . mysqli_error($operacao_servico));
+        } else {
+            if (mysqli_num_rows($operacao_servico) > 0){
+                $usuario = mysqli_fetch_assoc($operacao_servico);
+            } else {
+                header("Location: index.php");
+            }
+        }
+    
+    }
+    
 
 ?>
 
@@ -26,15 +94,19 @@ if(!isset($_SESSION['login'])){
         <div class="topo">
             
         </div>
+
         <div class="container">
-            <div class="row">
+
+            <form  id="servicoForm" action="<?=$_SERVER['PHP_SELF'];?>" method="post"> 
+            <input type="hidden" name="id" id="id" value="<?php echo $usuario["servicoID"]; ?>"/>
+            <div class="row" style="margin-top: 20px;">
                 <div class="col-md-6 col-sm-12">
                     <h1>Editar Serviço </h1>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-8 col-sm-12 d-flex align-items-end">
+                <div class="col-md-8 col-sm-12 d-flex align-items-end" style="margin-bottom: 30px;">
                     <div id="imagens">
                         <img src="content/img/foto-icone.png" class="icone-foto" alt="ícone enviar foto" />
                     </div>
@@ -48,23 +120,27 @@ if(!isset($_SESSION['login'])){
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group">
-                        <input type="password" class="form-control" id="servico" placeholder="Serviço">        
+                        <input type="text" class="form-control" name="nome" id="nome" placeholder="Serviço" value="<?php echo $usuario["nomeservico"]; ?>">        
+                        <?php echo (isset($nomeErro)) ?  "<span class=\"error-validation active\">" . $nomeErro ."</span>" : ""; ?>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group">
-                        <textarea class="form-control" id="descricao" placeholder="Descrição" rows="6"></textarea>        
+                        <textarea class="form-control" name="descricao" id="descricao" placeholder="Descrição" rows="6"> <?php echo $usuario["detalheservico"]; ?> </textarea>        
+                        <?php echo (isset($descricaoErro)) ?  "<span class=\"error-validation active\">" . $descricaoErro ."</span>" : ""; ?>
                     </div>
                 </div>
             </div>
             <div class"row">
                 <div class="col-md-6 col-sm-12">
-                    <input type="button" class="btn btn-outline-primary" value="Cancelar"/> 
+                    <a href="/editar-perfil.php" class="btn btn-outline-primary"> Voltar </a> 
                     <input type="submit" class="btn btn-outline-success" value="Salvar"/>
                 </div>
             </div>
+            </form>
+           
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

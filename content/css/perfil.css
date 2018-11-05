@@ -1,0 +1,68 @@
+body  {
+    background-color: #9e22de;
+}
+
+.container {
+    height: 100%;
+    padding: 20px 0px;
+}
+.cartao {
+    height: auto;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    background-color: #fff;
+    padding: 5% 5%;
+    padding-top: 2%;
+    border-top: 40px solid #31c13c;
+    border-bottom: 20px solid #31c13c;
+    margin-bottom: 20px;
+}
+
+.foto {
+    width: 100%;
+    padding-right: 25px;
+    border-right: 1px solid #c7b8b8;
+}
+
+h1{
+    margin-bottom: 0;
+}
+
+h2{
+    margin-bottom: 50px;
+    font-size: 16px;
+    color: #737373;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 5px;
+}
+
+.voltar {
+    margin-bottom: 50px;
+    font-size: 14px;
+}
+
+.row-servicos .col-3{
+    word-wrap: break-word;
+    align-items: stretch;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.row-servicos h5{
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.row-servicos .col-3:not(:nth-child(4n)) {
+    border-right: 1px solid #9a9a9a;
+}
+
+.img-servico{
+    width: 50%;
+    margin-bottom: 15px;
+}
+
+.row-servicos .col-3 a{
+    display: block;
+}

@@ -29,12 +29,15 @@
             $descricao = $_POST['descricao'];
             $usuarioId = $_SESSION['id'];
 
-            $inserir = "INSERT INTO servicolistagem(nomeservico,detalheservico,imagemservico,usuarioID) VALUES ('$nome', '$descricao', 'lib/img/user.png', '$usuarioId')";
+            $inserir = "INSERT INTO servicolistagem(nomeservico,detalheservico,imagemservico,usuarioID) VALUES ('$nome', '$descricao', 'lib/img/foto-icone.png', '$usuarioId')";
             $operacao_inserir = mysqli_query($conecta,$inserir);
                     
             if(!$operacao_inserir){
                 die("Erro no banco: " . mysqli_error($operacao_inserir));
             }
+
+            header("Location: editar-perfil.php");
+
         }
     }
     
@@ -65,7 +68,7 @@
             </div>
             <form id="servicoForm" action="<?=$_SERVER['PHP_SELF'];?>" method="post">
                 <div class="row">
-                    <div class="col-md-8 col-sm-12 d-flex align-items-end">
+                    <div class="col-md-8 col-sm-12 d-flex align-items-end" style="margin-bottom: 30px;">
                         <div id="imagens">
                             <img src="content/img/foto-icone.png" class="icone-foto" alt="ícone enviar foto" />
                         </div>
@@ -94,7 +97,7 @@
                 </div>
                 <div class"row">
                     <div class="col-md-6 col-sm-12">
-                        <input type="button" class="btn btn-outline-primary" value="Cancelar"/> 
+                        <a href="/editar-perfil.php" class="btn btn-outline-primary"> Voltar </a> 
                         <input name="submit" type="submit" class="btn btn-outline-success" value="Salvar"/>
                     </div>
                 </div>

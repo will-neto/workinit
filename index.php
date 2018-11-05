@@ -10,9 +10,12 @@ require_once("conexao/conexao.php"); ?>
         header("Location: index-unautenticated.php");
     }
 
-    $consulta_servicos = "SELECT nomeservico,detalheservico,nome, cidade, imagemservico, nomedeusuario".
+    $usuarioId = $_SESSION['id'];
+
+
+    $consulta_servicos = "SELECT id, nomeservico,detalheservico,nome, cidade, imagemservico, nomedeusuario".
                          " FROM servicolistagem,usuario". 
-                         " WHERE servicolistagem.usuarioID = usuario.id";
+                         " WHERE servicolistagem.usuarioID = usuario.id AND usuario.id ";
                     if(isset($_GET["pesquisa"])){
                         $pesquisa = $_GET["pesquisa"];
                         $consulta_servicos .= " AND nomeservico LIKE '%{$pesquisa}%'";
@@ -90,8 +93,15 @@ require_once("conexao/conexao.php"); ?>
                         </tr>
                         
                         <tr>
-                            <td><a class="btn-contato" data-usuario="<?php echo utf8_encode($registro["nomedeusuario"]);?>" > Adicionar Contato + 
-                            </a></td>
+                            <td style="padding-top: 10px;">
+                                <a class="btn-contato" data-usuario="<?php echo utf8_encode($registro["nomedeusuario"]);?>" > Adicionar Contato + 
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top: 10px;">
+                                <a class="btn-perfil" href="/perfil.php?id=<?php echo utf8_encode($registro["id"]);?>" > Visualizar Perfil </a>
+                            </td>
                         </tr>
                     </table>
                 </td></tr>
@@ -170,7 +180,10 @@ require_once("conexao/conexao.php"); ?>
                     console.log(data); 
 
                     if (data === ''){
+                    
                         toastr.success('Solicitação de amizade enviada com sucesso. Aguarde a resposta do usuário.', 'Solicitação de Amizade Enviado!');
+                        $('a[data-usuario="' + nomedousuario + '"').remove();
+
                     } else {
                         toastr.error(data, 'Ocorreu um erro...');
                     }

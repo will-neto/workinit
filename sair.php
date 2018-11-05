@@ -5,5 +5,5 @@
     unset($_SESSION['nome']);
     unset($_SESSION['email']);
     unset($_SESSION['nomedeusuario']);
-    header("location:login.php");
+    header("location:http://localhost:8081");
 ?>

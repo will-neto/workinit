@@ -1,0 +1,60 @@
+body{
+    background-color:green;
+    padding: 0;margin: 0;
+}
+
+main{
+
+    position: absolute;
+    top: 60px;
+    height: 620px;
+    background-color: #FFF;
+    width: 1400px;
+
+}
+
+h1{
+	position: absolute;
+	left: 1100px;
+	top: 50px;
+}
+
+h2{
+	position: absolute;
+	left: 920px;
+	top: 130px;
+}
+
+input {
+    
+    width: 35%;
+	height: 20px;
+	margin-bottom: 5px;
+	border :2px solid #757575;
+	margin: 5px;
+	margin-left: 250px;
+
+}
+
+form{
+
+	margin-top: 120px;
+}
+
+textarea{
+	position: absolute;
+	border: 2px solid #757575;
+	left: 850px;
+	top: 200px;
+}
+
+button [class= button1]{
+	
+	width: 5%;
+	position: absolute;
+	top: 400px;
+	left: 350px;
+	float: right;
+	margin-top: 80px;
+}
+

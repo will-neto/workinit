@@ -185,3 +185,14 @@ table{
     font-weight: bold;
     border: 2px solid #7aca22;
 }
+
+.btn-perfil {
+    background-color: #a023e0;
+    cursor: pointer;
+    border-radius: 50px;
+    margin-top: 5px;
+    padding: 0 10px;
+    color: #fff !important;
+    font-weight: bold;
+    border: 2px solid #841db9;
+}
