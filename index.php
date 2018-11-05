@@ -10,12 +10,40 @@ require_once("conexao/conexao.php"); ?>
         header("Location: index-unautenticated.php");
     }
 
-    $consulta_servicos = "SELECT nomeservico,detalheservico,nome, cidade, imagemservico, nomedeusuario FROM servicolistagem,usuario WHERE servicolistagem.usuarioID = usuario.id";
+    $consulta_servicos = "SELECT nomeservico,detalheservico,nome, cidade, imagemservico, nomedeusuario".
+                         " FROM servicolistagem,usuario". 
+                         " WHERE servicolistagem.usuarioID = usuario.id";
+                    if(isset($_GET["pesquisa"])){
+                        $pesquisa = $_GET["pesquisa"];
+                        $consulta_servicos .= " AND nomeservico LIKE '%{$pesquisa}%'";
+                    }
+
     $servicos = mysqli_query($conecta, $consulta_servicos);
     
     if(!$servicos){
         die("Falha na consulta ao banco de dados");
     }
+
+    $user = $_SESSION["id"];
+
+    $dados_user = "SELECT nome, uf, telefone, profissao, email ".
+                  " FROM usuario".
+                  " WHERE id = {$user}";
+
+    $dados_login = mysqli_query($conecta, $dados_user);
+    
+    if(!$dados_login){
+        die("Falha na consulta do banco.");
+    }
+    
+    $dados_login = mysqli_fetch_assoc($dados_login);
+    $nome = $dados_login["nome"];
+    $profissao = $dados_login["profissao"];
+    $estado = $dados_login["uf"];
+    $telefone = $dados_login["telefone"];
+    $email = $dados_login["email"];
+    
+    
 ?>
 
 <html>
@@ -32,18 +60,22 @@ require_once("conexao/conexao.php"); ?>
     </head>
 <body>
     <main>
-        <header>       
-            <input type=search name="pesquisa" id="pesquisador" placeholder="pesquise aqui"/>
+        <header>  
+            <form action= "index.php"  method="get">
+            <input type=search name="pesquisa" id="pesquisador" placeholder="pesquise aqui"/>,
             <img src="lib/img/logo-png.png" class="logo">
+            </form>
         </header>
         <section class="conteudo">
         <?php
         while($registro = mysqli_fetch_assoc($servicos)){
         ?>  
+            
             <table class="usuario-caixa">
                 <tr>
-                <td class="foto">
-                    <img src="<?php echo $registro["imagemservico"];?>" class="usuario2" alt="perfil"/>
+                    <td class="foto"><a href="detalhes-servico.php">
+                        <img src="<?php echo $registro["imagemservico"];?>" class="usuario2" alt="perfil"/>
+                    </a>
                 </td>
                 <td>
                     <table style="border:solid 0px;">
@@ -56,11 +88,12 @@ require_once("conexao/conexao.php"); ?>
                         <tr>
                             <td><?php echo utf8_encode($registro["cidade"]);?></td>
                         </tr>
+                        
                         <tr>
-                            <td><a class="btn-contato" data-usuario="<?php echo utf8_encode($registro["nomedeusuario"]);?>" > Adicionar Contato + </a></td>
+                            <td><a class="btn-contato" data-usuario="<?php echo utf8_encode($registro["nomedeusuario"]);?>" > Adicionar Contato + 
+                            </a></td>
                         </tr>
                     </table>
-        
                 </td></tr>
         </table>
         <?php   
@@ -97,19 +130,17 @@ require_once("conexao/conexao.php"); ?>
         
         <section class="menu">
             <img src="lib/img/user.png" class="usuario" alt="perfil" title="perfil"/>
-
-            <div class="dados">
-                <h3>Nome de usuario</h3>
-                <h5>Serviço Disponibilizado</h5>
-                <h6>Localização</h6>
-                <h6>Contato: (xx) 9xxx-xxxx/xxxx-xxxx</h6>
-                <h6>E-mail: usuario@exemplo.com</h6>
-            </div>
-
+                <div class="dados">
+                    <h3><?php echo $nome?></h3>
+                    <h5><?php echo $profissao?></h5>
+                    <h6><?php echo $estado?></h6>
+                    <h6>Telefone: <?php echo $telefone?></h6>
+                    <h6><?php echo $email?></h6>
+                </div>
             <nav>
                 <ul>
-                    <li>Editar perfil</li>
-                    <li>Sair</li>
+                    <li><a href="editar-perfil.php">Editar perfil</a></li>
+                    <li><a href="sair.php">Sair</a></li>
                 </ul>
             </nav>
         </section>

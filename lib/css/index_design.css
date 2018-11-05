@@ -3,6 +3,7 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
     font-size: 1em;
+    font-family: roboto;
 }
 
 main{
@@ -19,6 +20,8 @@ header{
 .logo{
     margin-left: 3%;
 }
+
+
 
 #pesquisador{
     font-family: roboto, arial;
@@ -60,8 +63,8 @@ header{
     position:absolute;
     text-align: center;
     top:20%;
-    padding: 15%;
     padding-top: 0%;
+    width: 90%;
 }
 
 nav{
@@ -76,6 +79,12 @@ section nav ul{
     
 }
 
+section nav ul li a{
+    text-decoration: none; 
+    color: #000
+}
+
+
 section nav ul li{
     font-family: roboto, arial;
     list-style-image: url('../img/lapis.png') ;
@@ -87,6 +96,8 @@ section nav ul li:first-child{
     list-style-image: url('../img/lapis.png') ;
    
 }
+
+
 
 section nav ul li:last-child{
     font-family: roboto;

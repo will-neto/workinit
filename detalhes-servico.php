@@ -44,8 +44,7 @@ if(!isset($_SESSION['login'])){
                     </div>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 text-right">
-                            <input type="submit" class="btn btn-outline-primary" value="Voltar"/>    
-                            <input type="submit" class="btn btn-outline-success" value="Chat"/>
+                            <a href = "index.php"><input type="submit" class="btn btn-outline-primary" value="Voltar"/></a> <a href = "chat.php"><input type="submit" class="btn btn-outline-success" value="Chat"/></a>
                         </div>
                     </div>
                 </div>

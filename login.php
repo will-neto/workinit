@@ -1,5 +1,7 @@
 <?php 
 //conexão variavel $coneta
+require_once("conexao/conexao.php"); 
+
 
     session_start();
 
